@@ -9,7 +9,7 @@ const Roller = ({ data, winner, doorText, run }) => {
   const radius = Trig.findRadius(data.length, rollers.height);
   const angleD = Trig.angleDelta(data.length);
   const [itemIndex, setItemIndex] = useState(0);
-  const timing = winner < 200 ? 7 : 10 + Math.min(15, data.length / 150);
+  const timing = winner < 300 ? 10 : 5 + Math.min(15, data.length / 150);
 
   useEffect(() => {
     if (run) {
