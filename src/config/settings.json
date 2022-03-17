@@ -1,0 +1,30 @@
+{
+  "defaultTitle": "Clover Competitions",
+  "totalRaffles": 5,
+  "machine": {
+    "rollers": {
+      "maxWidth": 400,
+      "height": 70,
+      "easing": {
+        "start": 0.205,
+        "in": -0.005,
+        "out": 0.008,
+        "end": 1.03
+      },
+      "door": {
+        "text": ["Clover Competitions"],
+        "image": "./images/door.jpg"
+      },
+      "text": {
+        "maxLength": 18,
+        "size": "40px",
+        "border": "2px 2px 0px #f1f1f1, 3px 3px 5px #000000"
+      },
+      "background": {
+        "image": "./images/whitecubert.jpg",
+        "opacity": 0.3,
+        "scale": 15
+      }
+    }
+  }
+}
