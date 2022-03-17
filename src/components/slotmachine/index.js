@@ -35,7 +35,7 @@ const SlotMachine = ({ raffle: { title, data }, run, setRun }) => {
           run={run}
         />
       </RollersContainer>
-      <Input onChange={hangleSetWinner} value={winner} />
+      <Input disabled={run} onChange={hangleSetWinner} value={winner} />
       <GoButton onClick={Spin}>{!run ? "Spin" : "Reset"}</GoButton>
     </Machine>
   );
