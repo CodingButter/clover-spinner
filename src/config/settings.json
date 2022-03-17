@@ -6,10 +6,10 @@
       "maxWidth": 400,
       "height": 70,
       "easing": {
-        "start": 0.205,
-        "in": -0.005,
-        "out": 0.008,
-        "end": 1.0
+        "start": 0.22,
+        "in": 0.145,
+        "out": 0.095,
+        "end": 0.8
       },
       "door": {
         "text": ["Clover Competitions"],
