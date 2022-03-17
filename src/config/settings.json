@@ -9,7 +9,7 @@
         "start": 0.205,
         "in": -0.005,
         "out": 0.008,
-        "end": 1.03
+        "end": 1.0
       },
       "door": {
         "text": ["Clover Competitions"],
