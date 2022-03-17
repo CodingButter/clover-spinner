@@ -1,6 +1,6 @@
 import settings from "../../config/settings.json";
 import styled from "styled-components";
-import { Button, Container } from "../../components/global";
+import { Button, Container } from "../global";
 const {
   machine: { rollers },
 } = settings;
