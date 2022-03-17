@@ -6,9 +6,9 @@
       "maxWidth": 400,
       "height": 70,
       "easing": {
-        "start": 0.205,
-        "in": -0.001,
-        "out": 0.0008,
+        "start": 0.2,
+        "in": -0.0005,
+        "out": 0.0005,
         "end": 1.0
       },
       "door": {
