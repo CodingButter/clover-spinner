@@ -129,12 +129,12 @@ text-shadow: ${rollers.text.border};
   &::before{
     z-index: -3;
     top: 0px;
-    background: white;
+    background:url("${rollers.background.image}");
     background-size:${rollers.background.scale}%;
     opacity: ${rollers.background.opacity};
     position: absolute;
     width: 100%;
-    height: 1px;
+    height: 100%;
     content: "";
     bottom:5%;
   }

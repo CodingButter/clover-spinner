@@ -22,7 +22,7 @@
       },
       "background": {
         "image": "./images/whitecubert.jpg",
-        "opacity": 0.3,
+        "opacity": 0.5,
         "scale": 15
       }
     }
