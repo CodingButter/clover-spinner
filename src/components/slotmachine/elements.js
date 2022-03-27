@@ -8,7 +8,6 @@ export const Machine = styled(Container)`
   height: 100%;
   max-width: 800px;
   width: 100%;
-  align-items: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -22,9 +21,6 @@ export const GoButton = styled(Button)`
 `;
 
 export const RollersContainer = styled(Container)`
-  display: flex;
-  align-items: center;
-  justify-items: center;
   padding: 10px;
   position: relative;
   border-radius: 10px;
@@ -39,8 +35,7 @@ export const RollersContainer = styled(Container)`
 `;
 
 export const RollerContainer = styled(Container)`
-  justify-content: center;
-  align-items: middle;
+  
   position: relative;
   height: ${rollers.height * 7}px;
   border-radius: 5px;
@@ -59,7 +54,10 @@ export const RollerContainer = styled(Container)`
 `;
 
 export const RollerWindow = styled(Container)`
-  position: relative;
+  position: absolute;
+  top:0px;
+  display:block;
+  height:${rollers.height *7}px;
   &::before {
     position: absolute;
     z-index: 100;
@@ -79,16 +77,18 @@ export const RollerWindow = styled(Container)`
 export const List = styled.ul`
   position: absolute;
   width: 100%;
-  height: ${rollers.height * 7}px;
-  overflow: hidden;
+  transform:translateY(${({itemIndex})=>-(itemIndex+3) * rollers.height}px);
+  transition: ${({run,timing})=>run ? `transform ${timing}s` : "initial"};
+  transition-timing-function: ${({run})=>run ? `cubic-bezier(${Object.keys(rollers.easing)
+          .map((key) => rollers.easing[key])
+          .join(", ")})`
+      : "initial"};
   /*&::after {
     content: "${({ doorText }) => doorText}";
     position: absolute;
     height: 100%;
     width: 100%;
-    display: flex;
     justify-content: center;
-    align-items: center;
     transition-delay: 1s;
     transition: bottom 1s;
     text-align: center;
@@ -101,24 +101,12 @@ export const List = styled.ul`
   }*/
 `;
 
-export const ListItem = styled.li.attrs(({ angle, timing, radius, run }) => ({
-  style: {
-    transform: `rotateX(${angle}deg)`,
-    transformOrigin: `0px ${rollers.height}px ${radius}px`,
-    transition: run ? `transform ${timing}s` : "initial",
-    transitionTimingFunction: run
-      ? `cubic-bezier(${Object.keys(rollers.easing)
-          .map((key) => rollers.easing[key])
-          .join(", ")})`
-      : "initial",
-  },
-}))`
-font-size: ${rollers.text.size};
-text-shadow: ${rollers.text.border};
-
+export const ListItem = styled.li`
+  transform:translateY(0px);
+  font-size: ${rollers.text.size};
+  text-shadow: ${rollers.text.border};
   color: ${({ theme }) => theme.background.darker};
   width: 100%;
-  position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;

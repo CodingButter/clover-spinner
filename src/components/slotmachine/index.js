@@ -7,21 +7,8 @@ const {
   machine: { rollers },
 } = settings;
 
-const SlotMachine = ({ raffle: { title, data }, run, setRun }) => {
-  const [winner, setWinner] = useState(0);
-  const hangleSetWinner = ({ target: { value } }) => {
-    setWinner(value);
-  };
-
-  const Spin = () => {
-    if (!run) setRun(true);
-    else Reset();
-  };
-
-  const Reset = () => {
-    setRun(false);
-    setWinner(0);
-  };
+const SlotMachine = ({ raffle: { title, data },handleSetWinner, winner,run,Spin }) => {
+   
   return (
     <Machine>
       <h1 className="mb-6 text-4xl text-white bg-green-400 p-8 rounded-lg">
@@ -35,7 +22,7 @@ const SlotMachine = ({ raffle: { title, data }, run, setRun }) => {
           run={run}
         />
       </RollersContainer>
-      <Input disabled={run} onChange={hangleSetWinner} value={winner} />
+      <Input disabled={run} onChange={handleSetWinner} value={winner} />
       <GoButton onClick={Spin}>{!run ? "Spin" : "Reset"}</GoButton>
     </Machine>
   );
