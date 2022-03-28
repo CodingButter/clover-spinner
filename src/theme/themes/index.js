@@ -3,14 +3,14 @@ import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
 const base = {
   primary: {
-    lighter: "#486da1",
-    default: "#33609e",
-    darker: "#2d5287",
+    lighter: "#000000",
+    default: "#333333",
+    darker: "#555555",
   },
   secondary: {
-    lighter: "#e97d48",
-    default: "#e3672a",
-    darker: "#973f13",
+    lighter: "#ffffff",
+    default: "#cccccc",
+    darker: "#aaaaaa",
   },
   background: {
     lighter: "#434747",

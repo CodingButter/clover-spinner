@@ -10,10 +10,9 @@ export const Container = styled.div`
 
 export const Button = styled.button`
   cursor: pointer;
-  padding: 10px;
   border-radius: 3px;
   border: none;
-  color: ${({ theme }) => theme.forground.lighter};
+  color: ${({ theme }) => theme.forground.darker};
   background: ${({ theme, focused }) =>
     focused ? theme.primary.darker : theme.secondary.lighter};
 `;

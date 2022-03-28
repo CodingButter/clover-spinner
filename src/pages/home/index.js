@@ -1,4 +1,4 @@
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import SlotMachine from "../../components/slotmachine";
 import { useRaffleManager } from "../../providers/RaffleProvider";
 import RaffleTabs from "../../components/rafflenav";
@@ -11,9 +11,9 @@ const Home = () => {
   };
 
   const Spin = () => {
-    if(winner>raffle.data.length){
-      alert("Ticket Out Of Range")
-      return
+    if (winner > raffle.data.length) {
+      alert("Ticket Out Of Range");
+      return;
     }
     if (!run) setRun(true);
     else Reset();
@@ -22,11 +22,21 @@ const Home = () => {
     setRun(false);
     setWinner(0);
   };
-  useEffect(()=>Reset(),[raffle])
+  useEffect(() => Reset(), [raffle]);
   return (
     <>
-      <RaffleTabs setRun={setRun} />
-      {raffle && <SlotMachine run={run} Spin={Spin} handleSetWinner={handleSetWinner} winner={winner} setRun={setRun} Reset={Reset} raffle={raffle} />}
+      <RaffleTabs Reset={Reset} />
+      {raffle && (
+        <SlotMachine
+          run={run}
+          Spin={Spin}
+          handleSetWinner={handleSetWinner}
+          winner={winner}
+          setRun={setRun}
+          Reset={Reset}
+          raffle={raffle}
+        />
+      )}
     </>
   );
 };

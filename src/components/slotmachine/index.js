@@ -7,11 +7,18 @@ const {
   machine: { rollers },
 } = settings;
 
-const SlotMachine = ({ raffle: { title, data },handleSetWinner, winner,run,Spin }) => {
-   
+const SlotMachine = ({
+  raffle: { title, data },
+  handleSetWinner,
+  winner,
+  run,
+  Spin,
+}) => {
   return (
     <Machine>
-      <h1 className="mb-6 text-4xl text-white bg-green-400 p-8 rounded-lg">
+      <h1
+        style={{ background: "#e3662a" }}
+        className="mb-6 text-4xl w-4/5 text-center text-white p-8 rounded-lg">
         {title}
       </h1>
       <RollersContainer>
@@ -22,8 +29,16 @@ const SlotMachine = ({ raffle: { title, data },handleSetWinner, winner,run,Spin 
           run={run}
         />
       </RollersContainer>
-      <Input disabled={run} onChange={handleSetWinner} value={winner} />
-      <GoButton onClick={Spin}>{!run ? "Spin" : "Reset"}</GoButton>
+      <div className="flex flex-row space-x-5">
+        <Input
+          disabled={run}
+          className="p-4 w-[120px] text-lg"
+          onChange={handleSetWinner}
+          value={winner}
+        />
+        <GoButton onClick={Spin}>{!run ? "Spin" : "Reset"}</GoButton>
+      </div>
+      <img className="w-[80px] mt-2" src="images/clovericon.png" />
     </Machine>
   );
 };

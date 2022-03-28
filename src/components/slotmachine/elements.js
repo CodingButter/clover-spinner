@@ -11,36 +11,33 @@ export const Machine = styled(Container)`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  padding: 40px;
 `;
 
-export const GoButton = styled(Button)`
-  width: 100px;
-  padding: 10px;
-  position: absolute;
-  bottom: 10px;
+export const GoButton = styled.button`
+  width: 120px;
+  padding: 0px;
+  background: #e3662a;
+  height: 45px;
+  border-radius: 5px;
+  margin-top: 10px;
+  color: white;
+  font-weight: bold;
 `;
 
 export const RollersContainer = styled(Container)`
-  padding: 10px;
   position: relative;
   border-radius: 10px;
-  border: 5px solid
-    ${({
-      theme: {
-        secondary: { lighter },
-      },
-    }) => lighter};
+  border: 10px solid white;
   background: ${({ theme: { secondary } }) => secondary.darker};
-  box-shadow: inset 0px 10px 9px 2px rgb(0 0 0 / 52%);
 `;
 
 export const RollerContainer = styled(Container)`
-  
   position: relative;
   height: ${rollers.height * 7}px;
   border-radius: 5px;
   overflow: hidden;
-  background-color: ${({ theme: { secondary } }) => secondary.default};
+  background-color: white;
   box-shadow: 0px 0px 0px 0px rgb(0 0 0 / 80%);
   border: inset 4px solid black;
   &::after {
@@ -55,9 +52,9 @@ export const RollerContainer = styled(Container)`
 
 export const RollerWindow = styled(Container)`
   position: absolute;
-  top:0px;
-  display:block;
-  height:${rollers.height *7}px;
+  top: 0px;
+  display: block;
+  height: ${rollers.height * 7}px;
   &::before {
     position: absolute;
     z-index: 100;
@@ -77,9 +74,14 @@ export const RollerWindow = styled(Container)`
 export const List = styled.ul`
   position: absolute;
   width: 100%;
-  transform:translateY(${({itemIndex})=>-(itemIndex+3) * rollers.height}px);
-  transition: ${({run,timing})=>run ? `transform ${timing}s` : "initial"};
-  transition-timing-function: ${({run})=>run ? `cubic-bezier(${Object.keys(rollers.easing)
+  transform: translateY(
+    ${({ itemIndex }) => -(itemIndex + 3) * rollers.height}px
+  );
+  transition: ${({ run, timing }) =>
+    run ? `transform ${timing}s` : "initial"};
+  transition-timing-function: ${({ run }) =>
+    run
+      ? `cubic-bezier(${Object.keys(rollers.easing)
           .map((key) => rollers.easing[key])
           .join(", ")})`
       : "initial"};

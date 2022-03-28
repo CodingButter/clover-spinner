@@ -3,11 +3,14 @@ import { useRaffleManager } from "../../providers/RaffleProvider";
 import { TabBar, Tab, Plus, Edit } from "./elements";
 import fileDialog from "file-dialog";
 import csv from "csvtojson";
-const Tabs = ({ setRun }) => {
+const Tabs = ({ Reset }) => {
   const { raffles, addRaffle, setRaffle, updateRaffle } = useRaffleManager();
   const [raffleIndex, setRaffleIndex] = useState(0);
   const [edit, setEdit] = useState(false);
-
+  const [updated, setUpdated] = useState(false);
+  const toggleUpdated = () => {
+    setUpdated(!updated);
+  };
   const toggleEdit = () => {
     setEdit((state) => !state);
   };
@@ -16,9 +19,9 @@ const Tabs = ({ setRun }) => {
     addRaffle("New Raffle", [], 0);
   };
   const selectRaffle = (index) => {
-    setRaffle(raffles[index]);
     setRaffleIndex(index);
-    setRun(false);
+    setRaffle(raffles[index]);
+    Reset();
   };
 
   const updateLabel = (label) => {
@@ -27,6 +30,7 @@ const Tabs = ({ setRun }) => {
 
   const updateData = (data, ticketsSold) => {
     updateRaffle(raffleIndex, null, data, ticketsSold);
+    setRaffle(raffles[raffleIndex]);
   };
   const runFileDialog = () => {
     fileDialog({ accept: "text/csv" }).then((files) => {
@@ -56,30 +60,40 @@ const Tabs = ({ setRun }) => {
       };
     });
   };
+  const handleCreateRaffle = () => {
+    createRaffle();
+    toggleUpdated();
+  };
   useEffect(() => {
     selectRaffle(raffles.length - 1);
-  }, [raffles]);
+  }, [updated]);
 
   return (
-    <TabBar>
-      {raffles.map(({ title, data, ticketsSold }, index) => {
-        return (
-          <Tab
-            updateLabel={updateLabel}
-            runFileDialog={runFileDialog}
-            index={index}
-            editable={edit && index === raffleIndex}
-            onClick={() => selectRaffle(index)}
-            selected={index === raffleIndex}
-            key={index}
-            text={title}
-            ticketsSold={ticketsSold}
-          />
-        );
-      })}
-      {(edit || raffles.length == 0) && <Plus addRaffle={createRaffle} />}
-      <Edit toggleEdit={toggleEdit} edit={edit} />
-    </TabBar>
+    <>
+      <TabBar>
+        {raffles.map(({ title, ticketsSold }, index) => {
+          return (
+            <Tab
+              updateLabel={updateLabel}
+              runFileDialog={runFileDialog}
+              index={index}
+              editable={edit && index === raffleIndex}
+              onClick={() => selectRaffle(index)}
+              selected={index === raffleIndex}
+              key={index}
+              text={title}
+              ticketsSold={ticketsSold}
+            />
+          );
+        })}
+      </TabBar>
+      <TabBar>
+        {(edit || raffles.length == 0) && (
+          <Plus addRaffle={handleCreateRaffle} />
+        )}
+        <Edit toggleEdit={toggleEdit} edit={edit} />
+      </TabBar>
+    </>
   );
 };
 
