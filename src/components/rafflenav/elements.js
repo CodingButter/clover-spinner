@@ -1,9 +1,7 @@
 import classNames from "classnames";
 export const TabBar = ({ children }) => {
   return (
-    <ul className="flex flex-row flex-nowrap p-2 w-full justify-center">
-      {children}
-    </ul>
+    <ul className="flex flex-row p-2 w-full justify-center">{children}</ul>
   );
 };
 
@@ -19,44 +17,45 @@ export const Tab = ({
   ticketsSold,
 }) => {
   return (
-    <li className="flex flex-row">
+    <li className="flex flex-row w-1/5">
       {!editable ? (
         <button
           style={{ background: selected ? "#e3972a" : "#e3662a" }}
           className={classNames(
-            `text-white text-3xl p-4 rounded-lg shadow-md
-          ${!editable && "rounded-sm"}`,
+            `shadow-lg p-2 py-4 text-white
+          ${!editable && "rounded-2xl"}`,
             className
           )}
           onClick={onClick}>
           {text}
         </button>
       ) : (
-        <input
-          style={{ background: selected ? "#e3972a" : "#e3662a" }}
-          onChange={({ target }) => updateLabel(target.value)}
-          value={text}
-          className={classNames(
-            `text-white text-2xl p-2 rounded-l-sm shadow-sm`,
-            className
-          )}
-          onClick={onClick}
-        />
-      )}
-      {editable && (
-        <button
-          onClick={runFileDialog}
-          className="p-2 flex justify-center items-center bg-blue-400 text-white"
-          htmlFor={`file-upload-${index}`}>
-          CSV
-        </button>
-      )}
-      {editable && (
-        <span
-          style={{ background: selected ? "#e3972a" : "#e3662a" }}
-          className="p-2 flex justify-center items-center rounded-r-sm text-white">
-          {ticketsSold}
-        </span>
+        <div className="flex flex-row w-full absolute top-0 left-0 justify-center p-10 rounded-xl">
+          <div className="flex flex-row w-8/12 rounded-3xl bg-white shadow-2xl justify-center p-10">
+            <input
+              style={{ background: selected ? "#e3972a" : "#e3662a" }}
+              onChange={({ target }) => updateLabel(target.value)}
+              value={text}
+              className={classNames(
+                `text-white text-sm p-2 shadow-sm`,
+                className
+              )}
+              onClick={onClick}
+            />
+
+            <button
+              onClick={runFileDialog}
+              className="p-4 flex justify-center items-center bg-blue-400 text-white"
+              htmlFor={`file-upload-${index}`}>
+              CSV
+            </button>
+            <span
+              style={{ background: selected ? "#e3972a" : "#e3662a" }}
+              className="p-4 flex justify-center items-center rounded text-white">
+              {ticketsSold}
+            </span>
+          </div>
+        </div>
       )}
     </li>
   );
