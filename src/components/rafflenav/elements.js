@@ -22,7 +22,7 @@ export const Tab = ({
         <button
           style={{ background: selected ? "#e3972a" : "#e3662a" }}
           className={classNames(
-            `shadow-lg p-2 py-4 text-white
+            `shadow-lg p-8 py-8 text-white
           ${!editable && "rounded-2xl"}`,
             className
           )}
@@ -62,14 +62,14 @@ export const Tab = ({
 };
 
 export const Plus = ({ addRaffle }) => {
-  return <Tab editable={false} onClick={addRaffle} text="+" />;
+  return <Tab className="z-50 absolute top-5 left-5" editable={false} onClick={addRaffle} text="+" />;
 };
 
 export const Edit = ({ edit, toggleEdit }) => {
   return (
     <Tab
       editable={false}
-      className={`absolute right-5 ${edit ? `top-50` : `top-5`} ${
+      className={`absolute right-5 top-5 z-50 ${
         !edit && "opacity-0 hover:opacity-100"
       }`}
       onClick={toggleEdit}
