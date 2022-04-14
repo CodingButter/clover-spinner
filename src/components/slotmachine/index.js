@@ -16,11 +16,11 @@ const SlotMachine = ({
 }) => {
   return (
     <Machine>
-      <h1
-        style={{ background: "#e3662a" }}
-        className="mb-6 text-4xl w-4/5 text-center text-white p-8 rounded-lg">
+      <div
+        style={{border:"20px solid #e3662a"}}
+        className="mb-6 text-4xl w-4/5 text-center text-black bg-white block p-8 rounded-lg">
         {title}
-      </h1>
+      </div>
       <RollersContainer>
         <Roller
           doorText={rollers.door.text}
@@ -38,7 +38,6 @@ const SlotMachine = ({
         />
         <GoButton onClick={Spin}>{!run ? "Spin" : "Reset"}</GoButton>
       </div>
-      <img className="w-[80px] mt-2" src="images/clovericon.png" />
     </Machine>
   );
 };

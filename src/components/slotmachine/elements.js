@@ -30,6 +30,29 @@ export const RollersContainer = styled(Container)`
   border-radius: 10px;
   border: 10px solid white;
   background: ${({ theme: { secondary } }) => secondary.darker};
+  &::before{
+    content:"";
+    width:75px;
+    height:75px;
+    transform-origin:center center;
+    background:url('./images/singleclover.png') 100%;
+    position:absolute;
+    background-size:cover;
+    left:-38px;
+    z-index:1000;
+  }
+  &::after{
+    content:"";
+    width:75px;
+    height:75px;
+    transform-origin:center center;
+    background:url('./images/singleclover.png');
+    background-size:cover;
+    transform:scale(-1);
+    position:absolute;
+    right:-38px;
+    z-index:1001;
+  }
 `;
 
 export const RollerContainer = styled(Container)`
@@ -64,8 +87,8 @@ export const RollerWindow = styled(Container)`
     background: rgb(0, 0, 0);
     background: linear-gradient(
       180deg,
-      rgba(0, 0, 0, 0.746096) 11%,
-      rgba(255, 255, 255, 0.3) 18%,
+      rgba(0, 0, 0, 1) 0%,
+      rgba(255, 255, 255, 0) 50%,
       rgba(0, 0, 0, 1) 100%
     );
   }
