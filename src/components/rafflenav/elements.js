@@ -22,7 +22,7 @@ export const Tab = ({
         <button
           style={{ background: selected ? "#e3972a" : "#e3662a" }}
           className={classNames(
-            `shadow-lg p-8 py-8 text-white
+            `shadow-lg p-8 py-4 text-white
           ${!editable && "rounded-2xl"}`,
             className
           )}

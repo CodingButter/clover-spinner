@@ -24,7 +24,7 @@ const Home = () => {
   };
   useEffect(() => Reset(), [raffle]);
   return (
-    <>
+    <div className="h-[85%]">
       <RaffleTabs Reset={Reset} />
       {raffle && (
         <SlotMachine
@@ -37,7 +37,7 @@ const Home = () => {
           raffle={raffle}
         />
       )}
-    </>
+    </div>
   );
 };
 export default Home;

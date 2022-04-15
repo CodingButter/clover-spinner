@@ -9,7 +9,7 @@
   "machine": {
     "rollers": {
       "maxWidth": 400,
-      "height": 80,
+      "height": 75,
       "easing": {
         "start": 0.2,
         "in": -0.0005,
