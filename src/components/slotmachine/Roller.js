@@ -9,7 +9,7 @@ const Roller = ({ data, winner, doorText, run }) => {
   const radius = Trig.findRadius(data.length, rollers.height);
   const angleD = Trig.angleDelta(data.length);
   const [itemIndex, setItemIndex] = useState(3);
-  const timing = Math.max(7, (winner / data.length) * 20);
+  const timing = Math.max(7, (winner / data.length) * 15);
   const transitionElement = useRef(null);
   const startSound = useRef(new Audio("sounds/spin.wav"));
   startSound.current.loop = true;

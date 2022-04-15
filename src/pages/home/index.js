@@ -24,7 +24,7 @@ const Home = () => {
   };
   useEffect(() => Reset(), [raffle]);
   return (
-    <div className="h-[85%]">
+    <div className="h-[85%] w-full">
       <RaffleTabs Reset={Reset} />
       {raffle && (
         <SlotMachine
