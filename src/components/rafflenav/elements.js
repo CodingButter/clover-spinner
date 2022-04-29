@@ -20,7 +20,7 @@ export const Tab = ({
     <li className="flex flex-row w-1/5">
       {!editable ? (
         <button
-          style={{ background: selected ? "#4570b4" : "#4570b4" }}
+          style={{ background: selected ? "#e3662a" : "#4570b4" }}
           className={classNames(
             `shadow-lg p-8 py-4 text-white
           ${!editable && "rounded-2xl"}`,
