@@ -2,15 +2,26 @@ import { RollerContainer, RollerWindow, List, ListItem } from "./elements";
 import Trig from "../../utilities/Trig";
 import { useEffect, useRef, useState } from "react";
 import settings from "../../config/settings.json";
+import useThrowPhysics from "../../hooks/useThrowPhysics";
 const {
   machine: { rollers },
 } = settings;
-const Roller = ({ data, winner, doorText, run }) => {
+const Roller = ({ data, winner, doorText, run, setThrown }) => {
   const radius = Trig.findRadius(data.length, rollers.height);
   const angleD = Trig.angleDelta(data.length);
   const [itemIndex, setItemIndex] = useState(3);
-  const timing = Math.max(7, (winner / data.length) * 15);
+  const timing = Math.max(7, (winner / data.length) * 13);
   const transitionElement = useRef(null);
+  const clickRef = useRef(null);
+  const throwPosition = useThrowPhysics({
+    updater: data,
+    canThrow: run == false,
+    clickRef,
+    throwRef: transitionElement,
+    friction: 0.93,
+    min: 0,
+    max: data.length - 1 > -1 ? (data.length - 1) * rollers.height : 1,
+  });
   const startSound = useRef(new Audio("sounds/spin.wav"));
   startSound.current.loop = true;
   startSound.current.volume = settings.volume.spin;
@@ -35,9 +46,11 @@ const Roller = ({ data, winner, doorText, run }) => {
     if (run) {
       setItemIndex(winner);
     } else {
-      setItemIndex(0);
+      console.log({ throwPosition });
+      setThrown(throwPosition > 0);
+      setItemIndex(throwPosition / rollers.height);
     }
-  }, [run]);
+  }, [run, throwPosition, data]);
   useEffect(() => {
     transitionElement.current.addEventListener?.(
       "transitionend",
@@ -60,14 +73,15 @@ const Roller = ({ data, winner, doorText, run }) => {
   }, [transitionElement.current, winner]);
   return (
     <RollerContainer>
-      <RollerWindow>
+      <RollerWindow ref={clickRef}>
         <List
           ref={transitionElement}
           doorText={doorText}
           run={run}
           timing={timing}
           itemIndex={data[data.length] ? itemIndex : itemIndex - 3}
-          count={data.length}>
+          count={data.length}
+        >
           {data[data.length - 1] &&
             [
               data[data.length - 1],

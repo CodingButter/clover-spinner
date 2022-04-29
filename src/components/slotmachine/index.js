@@ -11,14 +11,18 @@ const SlotMachine = ({
   raffle: { title, data },
   handleSetWinner,
   winner,
+  thrown,
+  setThrown,
   run,
+  Reset,
   Spin,
 }) => {
   return (
     <Machine>
       <div
-        style={{border:"20px solid #e3662a"}}
-        className="mb-6 text-4xl w-4/5 text-center text-black bg-white block p-8 rounded-lg">
+        style={{ border: "20px solid #e3662a" }}
+        className="mb-6 text-4xl w-4/5 text-center text-black bg-white block p-8 rounded-lg"
+      >
         {title}
       </div>
       <RollersContainer>
@@ -27,16 +31,21 @@ const SlotMachine = ({
           winner={winner}
           data={data}
           run={run}
+          thrown={thrown}
+          setThrown={setThrown}
         />
       </RollersContainer>
-      <div className="flex flex-row space-x-5">
+      <div className={`${thrown && "invisible"} flex flex-row space-x-5`}>
         <Input
-          disabled={run}
+          disabled={run || thrown}
           className="p-4 w-[120px] text-lg"
           onChange={handleSetWinner}
           value={winner}
         />
-        <GoButton onClick={Spin}>{!run ? "Spin" : "Reset"}</GoButton>
+
+        <GoButton onClick={thrown ? Reset : Spin}>
+          {!run ? "Spin" : "Reset"}
+        </GoButton>
       </div>
     </Machine>
   );

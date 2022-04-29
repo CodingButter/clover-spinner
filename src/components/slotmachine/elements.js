@@ -30,28 +30,28 @@ export const RollersContainer = styled(Container)`
   border-radius: 10px;
   border: 10px solid white;
   background: ${({ theme: { secondary } }) => secondary.darker};
-  &::before{
-    content:"";
-    width:75px;
-    height:75px;
-    transform-origin:center center;
-    background:url('./images/singleclover.png') 100%;
-    position:absolute;
-    background-size:cover;
-    left:-38px;
-    z-index:1000;
+  &::before {
+    content: "";
+    width: 75px;
+    height: 75px;
+    transform-origin: center center;
+    background: url("./images/singleclover.png") 100%;
+    position: absolute;
+    background-size: cover;
+    left: -38px;
+    z-index: 1000;
   }
-  &::after{
-    content:"";
-    width:75px;
-    height:75px;
-    transform-origin:center center;
-    background:url('./images/singleclover.png');
-    background-size:cover;
-    transform:scale(-1);
-    position:absolute;
-    right:-38px;
-    z-index:1001;
+  &::after {
+    content: "";
+    width: 75px;
+    height: 75px;
+    transform-origin: center center;
+    background: url("./images/singleclover.png");
+    background-size: cover;
+    transform: scale(-1);
+    position: absolute;
+    right: -38px;
+    z-index: 1001;
   }
 `;
 
@@ -98,7 +98,11 @@ export const List = styled.ul`
   position: absolute;
   width: 100%;
   transform: translateY(
-    ${({ itemIndex }) => -(itemIndex + 3) * rollers.height}px
+    ${({ itemIndex, count }) => {
+      const position = -(itemIndex + 3) * rollers.height;
+
+      return position;
+    }}px
   );
   transition: ${({ run, timing }) =>
     run ? `transform ${timing}s` : "initial"};

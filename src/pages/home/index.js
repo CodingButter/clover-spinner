@@ -4,6 +4,7 @@ import { useRaffleManager } from "../../providers/RaffleProvider";
 import RaffleTabs from "../../components/rafflenav";
 const Home = () => {
   const [run, setRun] = useState(false);
+  const [thrown, setThrown] = useState(false);
   const { raffle } = useRaffleManager();
   const [winner, setWinner] = useState(0);
   const handleSetWinner = ({ target: { value } }) => {
@@ -29,6 +30,8 @@ const Home = () => {
       {raffle && (
         <SlotMachine
           run={run}
+          thrown={thrown}
+          setThrown={setThrown}
           Spin={Spin}
           handleSetWinner={handleSetWinner}
           winner={winner}
