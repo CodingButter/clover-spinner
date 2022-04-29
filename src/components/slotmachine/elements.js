@@ -100,7 +100,6 @@ export const List = styled.ul`
   transform: translateY(
     ${({ itemIndex, count }) => {
       const position = -(itemIndex + 3) * rollers.height;
-
       return position;
     }}px
   );

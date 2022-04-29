@@ -2,12 +2,15 @@
   "defaultTitle": "Clover Competitions",
   "totalRaffles": 5,
   "volume": {
-    "spin": 1,
-    "loser": 0.5,
-    "winner": 0.25
+    "spin": 0,
+    "loser": 0,
+    "winner": 0
   },
   "machine": {
     "rollers": {
+      "physics": {
+        "friction": 0.92
+      },
       "maxWidth": 400,
       "height": 75,
       "easing": {

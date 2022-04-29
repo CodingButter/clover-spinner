@@ -18,7 +18,7 @@ const Roller = ({ data, winner, doorText, run, setThrown }) => {
     canThrow: run == false,
     clickRef,
     throwRef: transitionElement,
-    friction: 0.93,
+    friction: rollers.physics.friction,
     min: 0,
     max: data.length - 1 > -1 ? (data.length - 1) * rollers.height : 1,
   });
@@ -31,7 +31,6 @@ const Roller = ({ data, winner, doorText, run, setThrown }) => {
   };
   const transitionOver = () => {
     startSound.current.pause();
-    console.log({ name: data[winner], winner });
     if (data[winner].indexOf("Not") > -1) {
       var audio = new Audio("sounds/loser.wav");
       audio.volume = settings.volume.loser;
@@ -46,7 +45,6 @@ const Roller = ({ data, winner, doorText, run, setThrown }) => {
     if (run) {
       setItemIndex(winner);
     } else {
-      console.log({ throwPosition });
       setThrown(throwPosition > 0);
       setItemIndex(throwPosition / rollers.height);
     }

@@ -20,20 +20,21 @@ export const Tab = ({
     <li className="flex flex-row w-1/5">
       {!editable ? (
         <button
-          style={{ background: selected ? "#e3972a" : "#e3662a" }}
+          style={{ background: selected ? "#4570b4" : "#4570b4" }}
           className={classNames(
             `shadow-lg p-8 py-4 text-white
           ${!editable && "rounded-2xl"}`,
             className
           )}
-          onClick={onClick}>
+          onClick={onClick}
+        >
           {text}
         </button>
       ) : (
         <div className="flex flex-row w-full absolute top-0 left-0 justify-center p-10 rounded-xl">
           <div className="flex flex-row w-8/12 rounded-3xl bg-white shadow-2xl justify-center p-10">
             <input
-              style={{ background: selected ? "#e3972a" : "#e3662a" }}
+              style={{ background: selected ? "#e3662a" : "#e3662a" }}
               onChange={({ target }) => updateLabel(target.value)}
               value={text}
               className={classNames(
@@ -46,12 +47,14 @@ export const Tab = ({
             <button
               onClick={runFileDialog}
               className="p-4 flex justify-center items-center bg-blue-400 text-white"
-              htmlFor={`file-upload-${index}`}>
+              htmlFor={`file-upload-${index}`}
+            >
               CSV
             </button>
             <span
               style={{ background: selected ? "#e3972a" : "#e3662a" }}
-              className="p-4 flex justify-center items-center rounded text-white">
+              className="p-4 flex justify-center items-center rounded text-white"
+            >
               {ticketsSold}
             </span>
           </div>
@@ -62,7 +65,14 @@ export const Tab = ({
 };
 
 export const Plus = ({ addRaffle }) => {
-  return <Tab className="z-50 absolute top-5 left-5" editable={false} onClick={addRaffle} text="+" />;
+  return (
+    <Tab
+      className="z-50 absolute top-5 left-5"
+      editable={false}
+      onClick={addRaffle}
+      text="+"
+    />
+  );
 };
 
 export const Edit = ({ edit, toggleEdit }) => {

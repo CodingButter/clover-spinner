@@ -17,7 +17,7 @@ const useThrowPhysics = ({
     var mouseYPos = 0;
     const loop = () => {
       setPosition((currentState) => {
-        var updatedState = currentState - accel;
+        var updatedState = currentState - accel * 2;
         if (updatedState < min) updatedState = min;
         if (updatedState > max) updatedState = max;
         return updatedState;
@@ -43,7 +43,7 @@ const useThrowPhysics = ({
     mouseUp = () => {
       mouseIsDown = false;
     };
-    loopInt = setInterval(loop, 12);
+    loopInt = setInterval(loop, 30);
   };
   const resetPosition = () => {
     setPosition(0);
