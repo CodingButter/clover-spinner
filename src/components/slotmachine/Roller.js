@@ -10,6 +10,8 @@ const Roller = ({ data, winner, doorText, run, setThrown }) => {
   const radius = Trig.findRadius(data.length, rollers.height)
   const angleD = Trig.angleDelta(data.length)
   const [itemIndex, setItemIndex] = useState(3)
+  const [notSolds, setNotSolds] = useState(0)
+  winner = winner - notSolds
   const timing = Math.max(7, (winner / data.length) * 20)
   const transitionElement = useRef(null)
   const clickRef = useRef(null)
@@ -41,6 +43,21 @@ const Roller = ({ data, winner, doorText, run, setThrown }) => {
       audio.play()
     }
   }
+  useEffect(() => {
+    setNotSolds(0)
+    let show = false
+    for (var index = 1; index < data.length; index++) {
+      const label = data[index]
+      if (label !== "Not Sold") show = true
+      else if (!show) {
+        setNotSolds((currentState) => {
+          const newVal = currentState + 1
+          console.log(newVal)
+          return newVal
+        })
+      }
+    }
+  }, [data])
   useEffect(() => {
     if (run) {
       setItemIndex(winner)
@@ -82,24 +99,42 @@ const Roller = ({ data, winner, doorText, run, setThrown }) => {
             <span> </span>
             <span>Competitions</span>
           </ListItem>
-          {data.map((label, index) => {
-            return (
-              <ListItem key={`${index}-${label}`}>
-                <span>{label}</span>
-                <span> - </span>
-                <span>{index}</span>
-              </ListItem>
-            )
-          })}
-          {data.map((label, index) => {
-            return (
-              <ListItem key={`${index}-${label}`}>
-                <span>{label}</span>
-                <span> - </span>
-                <span>{index}</span>
-              </ListItem>
-            )
-          })}
+          {(() => {
+            let show = false
+            const items = []
+            for (var index = 1; index < data.length; index++) {
+              const label = data[index]
+              if (label !== "Not Sold") show = true
+              if (show) {
+                items.push(
+                  <ListItem key={`${index}-${label}`}>
+                    <span>{label}</span>
+                    <span> - </span>
+                    <span>{index}</span>
+                  </ListItem>
+                )
+              }
+            }
+            return items
+          })()}
+          {(() => {
+            let show = false
+            const items = []
+            for (var index = 1; index < data.length; index++) {
+              const label = data[index]
+              if (label !== "Not Sold") show = true
+              if (show) {
+                items.push(
+                  <ListItem key={`${index}-${label}`}>
+                    <span>{label}</span>
+                    <span> - </span>
+                    <span>{index}</span>
+                  </ListItem>
+                )
+              }
+            }
+            return items
+          })()}
         </List>
       </RollerWindow>
     </RollerContainer>
