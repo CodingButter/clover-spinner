@@ -1,9 +1,9 @@
-import settings from "../../config/settings.json";
-import styled from "styled-components";
-import { Button, Container } from "../global";
+import settings from "../../config/settings.json"
+import styled from "styled-components"
+import { Button, Container } from "../global"
 const {
   machine: { rollers },
-} = settings;
+} = settings
 export const Machine = styled(Container)`
   height: 100%;
   max-width: 800px;
@@ -12,7 +12,7 @@ export const Machine = styled(Container)`
   flex-direction: column;
   justify-content: center;
   padding: 40px;
-`;
+`
 
 export const GoButton = styled.button`
   width: 120px;
@@ -23,7 +23,7 @@ export const GoButton = styled.button`
   margin-top: 10px;
   color: white;
   font-weight: bold;
-`;
+`
 
 export const RollersContainer = styled(Container)`
   position: relative;
@@ -53,7 +53,7 @@ export const RollersContainer = styled(Container)`
     right: -38px;
     z-index: 1001;
   }
-`;
+`
 
 export const RollerContainer = styled(Container)`
   position: relative;
@@ -65,13 +65,23 @@ export const RollerContainer = styled(Container)`
   border: inset 4px solid black;
   &::after {
     content: "";
-    width: 100%;
+    width: 50px;
     height: 3px;
     background: black;
     position: absolute;
-    top: 50%;
+    right: 30px;
+    top: calc(50% - 2px);
   }
-`;
+  &::before {
+    content: "";
+    width: 50px;
+    height: 3px;
+    background: black;
+    position: absolute;
+    left: 30px;
+    top: calc(50% - 2px);
+  }
+`
 
 export const RollerWindow = styled(Container)`
   position: absolute;
@@ -79,6 +89,7 @@ export const RollerWindow = styled(Container)`
   display: block;
   height: ${rollers.height * 7}px;
   &::before {
+    opacity: 0.94;
     position: absolute;
     z-index: 100;
     content: "";
@@ -92,19 +103,18 @@ export const RollerWindow = styled(Container)`
       rgba(0, 0, 0, 1) 100%
     );
   }
-`;
+`
 
 export const List = styled.ul`
   position: absolute;
   width: 100%;
   transform: translateY(
     ${({ itemIndex, count }) => {
-      const position = -(itemIndex + 3) * rollers.height;
-      return position;
+      const position = -(itemIndex + 3) * rollers.height
+      return position
     }}px
   );
-  transition: ${({ run, timing }) =>
-    run ? `transform ${timing}s` : "initial"};
+  transition: ${({ run, timing }) => (run ? `transform ${timing}s` : "initial")};
   transition-timing-function: ${({ run }) =>
     run
       ? `cubic-bezier(${Object.keys(rollers.easing)
@@ -127,7 +137,7 @@ export const List = styled.ul`
     bottom: ${({ run }) => (run ? 100 : 0)}%;
     color: theme.background.darker;
   }*/
-`;
+`
 
 export const ListItem = styled.li`
   transform:translateY(0px);
@@ -154,4 +164,4 @@ export const ListItem = styled.li`
     content: "";
     bottom:5%;
   }
-}`;
+}`
