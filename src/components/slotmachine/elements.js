@@ -63,24 +63,6 @@ export const RollerContainer = styled(Container)`
   background-color: white;
   box-shadow: 0px 0px 0px 0px rgb(0 0 0 / 80%);
   border: inset 4px solid black;
-  &::after {
-    content: "";
-    width: 50px;
-    height: 3px;
-    background: black;
-    position: absolute;
-    right: 30px;
-    top: calc(50% - 2px);
-  }
-  &::before {
-    content: "";
-    width: 50px;
-    height: 3px;
-    background: black;
-    position: absolute;
-    left: 30px;
-    top: calc(50% - 2px);
-  }
 `
 
 export const RollerWindow = styled(Container)`
@@ -137,6 +119,21 @@ export const List = styled.ul`
     bottom: ${({ run }) => (run ? 100 : 0)}%;
     color: theme.background.darker;
   }*/
+`
+const Line = styled(Container)`
+  content: "";
+  width: 50px;
+  height: 3px;
+  background: black;
+  position: absolute;
+  top: calc(50% - 2px);
+`
+
+export const LeftLine = styled(Line)`
+  left: 30px;
+`
+export const RightLine = styled(Line)`
+  right: 30px;
 `
 
 export const ListItem = styled.li`
