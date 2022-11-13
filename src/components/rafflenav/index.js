@@ -1,41 +1,41 @@
-import { useEffect, useState } from "react"
-import { useRaffleManager } from "../../providers/RaffleProvider"
-import { TabBar, Tab, Plus, Edit } from "./elements"
-import fileDialog from "file-dialog"
-import csv from "csvtojson"
+import { useEffect, useState } from "react";
+import { useRaffleManager } from "../../providers/RaffleProvider";
+import { TabBar, Tab, Plus, Edit } from "./elements";
+import fileDialog from "file-dialog";
+import csv from "csvtojson";
 const Tabs = ({ Reset }) => {
-  const { raffles, addRaffle, setRaffle, updateRaffle } = useRaffleManager()
-  const [raffleIndex, setRaffleIndex] = useState(0)
-  const [edit, setEdit] = useState(false)
-  const [updated, setUpdated] = useState(false)
+  const { raffles, addRaffle, setRaffle, updateRaffle } = useRaffleManager();
+  const [raffleIndex, setRaffleIndex] = useState(0);
+  const [edit, setEdit] = useState(false);
+  const [updated, setUpdated] = useState(false);
   const toggleUpdated = () => {
-    setUpdated(!updated)
-  }
+    setUpdated(!updated);
+  };
   const toggleEdit = () => {
-    setEdit((state) => !state)
-  }
+    setEdit((state) => !state);
+  };
 
   const createRaffle = () => {
-    addRaffle("New Raffle", [], 0)
-  }
+    addRaffle("New Raffle", [], 0);
+  };
   const selectRaffle = (index) => {
-    setRaffleIndex(index)
-    setRaffle(raffles[index])
-    Reset()
-  }
+    setRaffleIndex(index);
+    setRaffle(raffles[index]);
+    Reset();
+  };
 
   const updateLabel = (label) => {
-    updateRaffle(raffleIndex, label)
-  }
+    updateRaffle(raffleIndex, label);
+  };
 
   const updateData = (data, ticketsSold) => {
-    updateRaffle(raffleIndex, null, data, ticketsSold)
-    setRaffle(raffles[raffleIndex])
-  }
+    updateRaffle(raffleIndex, null, data, ticketsSold);
+    setRaffle(raffles[raffleIndex]);
+  };
   const runFileDialog = () => {
     fileDialog({ accept: "text/csv" }).then((files) => {
-      const reader = new FileReader()
-      reader.readAsText(files[0])
+      const reader = new FileReader();
+      reader.readAsText(files[0]);
       reader.onload = function () {
         csv({
           noheader: false,
@@ -46,27 +46,27 @@ const Tabs = ({ Reset }) => {
             const results = csvRow.map((row) => ({
               name: row[3],
               ticket: row[1],
-            }))
-            var fullArray = []
+            }));
+            var fullArray = [];
             results.forEach(({ name, ticket }, index) => {
-              fullArray[ticket] = name
-            })
+              fullArray[ticket] = name;
+            });
             for (let i = 1; i < fullArray.length; i++) {
-              const name = fullArray[i]
-              if (!name) fullArray[i] = "Not Sold"
+              const name = fullArray[i];
+              if (!name) fullArray[i] = "Not Sold";
             }
-            updateData(fullArray, results.length - 1)
-          })
-      }
-    })
-  }
+            updateData(fullArray, results.length - 1);
+          });
+      };
+    });
+  };
   const handleCreateRaffle = () => {
-    createRaffle()
-    toggleUpdated()
-  }
+    createRaffle();
+    toggleUpdated();
+  };
   useEffect(() => {
-    selectRaffle(raffles.length - 1)
-  }, [updated])
+    selectRaffle(raffles.length - 1);
+  }, [updated]);
 
   return (
     <>
@@ -84,13 +84,17 @@ const Tabs = ({ Reset }) => {
               text={title}
               ticketsSold={ticketsSold}
             />
-          )
+          );
         })}
       </TabBar>
-      {(edit || raffles.length == 0) && <Plus addRaffle={handleCreateRaffle} />}
-      <Edit toggleEdit={toggleEdit} edit={edit} />
+      <TabBar>
+        {(edit || raffles.length == 0) && (
+          <Plus addRaffle={handleCreateRaffle} />
+        )}
+        <Edit toggleEdit={toggleEdit} edit={edit} />
+      </TabBar>
     </>
-  )
-}
+  );
+};
 
-export default Tabs
+export default Tabs;
